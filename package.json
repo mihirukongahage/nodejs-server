@@ -1,0 +1,32 @@
+{
+  "name": "personal-notes-manager",
+  "version": "1.0.0",
+  "description": "personal notes manager",
+  "main": "./app/server.js",
+  "scripts": {
+    "start": "node ./app/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mihirukongahage/personal-notes-manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mihirukongahage/personal-notes-manager/issues"
+  },
+  "homepage": "https://github.com/mihirukongahage/personal-notes-manager#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.4.3",
+    "supertest": "^6.1.6"
+  }
+}

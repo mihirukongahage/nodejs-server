@@ -1,0 +1,135 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Personal notes manager API documentation",
+        "version": "0.0.1",
+        "title": "Personal Notes Manager API"
+    },
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/add-note": {
+            "post": {
+                "summary": "Add a note",
+                "description": "",
+                "parameters": [
+                    {
+                      "name": "user_id",
+                      "description": "Id of the note creator"
+                    },
+                    {
+                        "name": "note",
+                        "description": "Note added by the user"
+                      }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/update-note": {
+            "patch": {
+                "summary": "Update a note",
+                "description": "",
+                "parameters": [
+                    {
+                      "name": "note_id",
+                      "description": "Id of the note being updated"
+                    },
+                    {
+                        "name": "note",
+                        "description": "Note updated by the user"
+                      }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/delete-note": {
+            "delete": {
+                "summary": "Delete a note",
+                "description": "",
+                "parameters": [
+                    {
+                      "name": "note_id",
+                      "description": "Id of the note being updated"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/archive-note": {
+            "patch": {
+                "summary": "Archive a note",
+                "description": "",
+                "parameters": [
+                    {
+                      "name": "note_id",
+                      "description": "Id of the note being archived"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/unarchive-note": {
+            "patch": {
+                "summary": "Unarchive a note",
+                "description": "",
+                "parameters": [
+                    {
+                      "name": "note_id",
+                      "description": "Id of the note being unarchived"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/list-unarchived-note": {
+            "get": {
+                "summary": "List all unarchived a notes",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/list-archived-note": {
+            "get": {
+                "summary": "List all archived a notes",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
