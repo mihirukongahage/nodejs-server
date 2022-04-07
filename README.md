@@ -18,11 +18,38 @@ cd /personal-notes-manager
 npm install
 ```
 
+3. Configure Terraform
+
+Add AWS credentials `secret.tfvars` file to the root directory and add following lines,
+
+```sh
+# AWS CONFIGS
+AWS_REGION="<region>"
+AWS_ACCESS_KEY="<access_key>"
+AWS_SECRET_KEY="<secret_key>"
+
+# DATABASE CONFIGS
+db_name="<database_name>"
+username="<username>"
+password="<password>"
+```
+
+Initialize AWS resources
+
+```sh
+terraform init
+terraform apply -var-file="secret.tfvars" -lock=false
+```
+
+Copy `resources.instances[0].attributes.address` varible in `terraform.tfstate` to `ENDPOINT` variable in `.env` file.
+
 4. Start the Server
 
 ```sh
 npm start
 ```
+
+5. Create the database tables manually.
 
 ## How to use the APIs
 

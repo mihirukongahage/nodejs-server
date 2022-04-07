@@ -1,2 +1,7 @@
 node_modules
 .env
+
+# terraform
+secret.tfvars
+terraform.tfstate
+.terraform.lock.hcl
