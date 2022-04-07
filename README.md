@@ -29,7 +29,6 @@ AWS_ACCESS_KEY="<access_key>"
 AWS_SECRET_KEY="<secret_key>"
 
 # DATABASE CONFIGS
-db_name="<database_name>"
 username="<username>"
 password="<password>"
 ```

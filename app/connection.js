@@ -8,6 +8,18 @@ connection.getConnection((err) => {
         console.log(`Unable to connect to the database`, err)
     }
     console.log(`Connected to Database`)
+
+
+    // create notes table
+    let query = `CREATE TABLE notes (
+                user_id INT NOT NULL, 
+                note VARCHAR(255),
+                PRIMARY KEY(user_id))`
+
+    connection.query(query, function(err, result){
+        if (err) throw err;
+        console.log("Notes table created");
+    })
 })
 
 module.exports = connection;

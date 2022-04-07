@@ -15,7 +15,7 @@ provider "aws" {
 resource "aws_db_instance" "personal_notes_manager" {
   engine                  = "mysql"
   engine_version          = "8.0.28"
-  db_name                 = var.db_name
+  db_name                 = "personal_notes_manager"
   username                = var.username
   password                = var.password
   instance_class          = "db.t2.micro"

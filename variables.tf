@@ -17,11 +17,6 @@ variable "AWS_SECRET_KEY" {
 
 
 # DATABASE CONFIGS
-variable "db_name" {
-  description = "database name"
-  type        = string
-  sensitive   = true
-}
 variable "username" {
   description = "database username"
   type        = string
