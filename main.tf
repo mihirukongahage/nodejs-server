@@ -24,3 +24,7 @@ resource "aws_db_instance" "personal_notes_manager" {
   max_allocated_storage   = 50
   publicly_accessible     = true  
 }
+
+output "aws_db_instance_address" {
+   value = aws_db_instance.personal_notes_manager.address
+}

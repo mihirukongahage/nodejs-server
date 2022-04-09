@@ -20,7 +20,7 @@ npm install
 
 3. Configure Terraform
 
-Add AWS credentials `secret.tfvars` file to the root directory and add following lines,
+Create `secret.tfvars` file in the root directory and add the following AWS credentials,
 
 ```sh
 # AWS CONFIGS
@@ -37,10 +37,12 @@ Initialize AWS resources
 
 ```sh
 terraform init
-terraform apply -var-file="secret.tfvars" -lock=false
+terraform apply -var-file="secret.tfvars" -lock=false --auto-approve
 ```
 
-Copy `resources.instances[0].attributes.address` varible in `terraform.tfstate` to `ENDPOINT` variable in `.env` file.
+```sh
+Copy `aws_db_instance_address` shown in CLI to `ENDPOINT` variable in `.env` file.
+```
 
 4. Start the Server
 
