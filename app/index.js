@@ -15,7 +15,6 @@ app.use(cors())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api', require('./notes/note'))
-app.use('/api', require('./archives/archive'))
 app.use('/api', require('./uploads/upload'))
 
 // Error handling

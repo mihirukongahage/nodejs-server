@@ -75,58 +75,19 @@
                 }
             }
         },
-        "/archive-note": {
-            "patch": {
-                "summary": "Archive a note",
+        "/upload": {
+            "post": {
+                "summary": "Upload a file",
                 "description": "",
                 "parameters": [
                     {
-                      "name": "note_id",
-                      "description": "Id of the note being archived"
+                      "image": "file",
+                      "description": "file to be uploaded"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/unarchive-note": {
-            "patch": {
-                "summary": "Unarchive a note",
-                "description": "",
-                "parameters": [
-                    {
-                      "name": "note_id",
-                      "description": "Id of the note being unarchived"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/list-unarchived-note": {
-            "get": {
-                "summary": "List all unarchived a notes",
-                "description": "",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/list-archived-note": {
-            "get": {
-                "summary": "List all archived a notes",
-                "description": "",
-                "responses": {
-                    "200": {
-                        "description": "OK"
+                        "description": "File uploaded"
                     }
                 }
             }
