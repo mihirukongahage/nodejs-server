@@ -11,7 +11,7 @@ connection.getConnection((err) => {
 
 
     // create notes table
-    let query = `CREATE TABLE notes (
+    let query = `CREATE TABLE IF NOT EXISTS notes (
                 user_id INT NOT NULL, 
                 note VARCHAR(255),
                 PRIMARY KEY(user_id))`
