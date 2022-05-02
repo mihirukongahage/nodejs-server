@@ -1,10 +1,72 @@
 const router = require('express').Router()
 const pool = require("../connection")
 
+
+/**
+ * Get all notes
+ */
+ router.get('/notes', (req, res) => {
+    
+    let query = `SELECT * FROM notes`
+
+    pool.query(query, (err, result) => {
+        if(err){
+            console.log(err)
+            res.status(500).send(err)
+        }
+        var notesArray = JSON.parse(JSON.stringify(result))
+        console.log(`return all notes`)
+        res.status(201).send(notesArray)
+    })
+})
+
+
+/**
+ * Get notes by user_id
+ */
+ router.get('/notes/:user_id', (req, res) => {
+    
+    const { user_id } = req.params;
+    let query = `SELECT * FROM notes WHERE user_id=?`
+    let values = [user_id]
+
+    pool.query(query, values, (err, result) => {
+        if(err){
+            console.log(err)
+            res.status(500).send(err)
+        }
+        var note = JSON.parse(JSON.stringify(result))
+        console.log(`return notes with the user id ${user_id}`)
+        res.status(201).send(note)
+    })
+})
+
+
+/**
+ * Get note by note_id
+ */
+ router.get('/note/:note_id', (req, res) => {
+    
+    const { note_id } = req.params;
+    let query = `SELECT * FROM notes WHERE note_id=?`
+    let values = [note_id]
+
+    pool.query(query, values, (err, result) => {
+        if(err){
+            console.log(err)
+            res.status(500).send(err)
+        }
+        var note = JSON.parse(JSON.stringify(result))
+        console.log(`return note with the id ${note_id}`)
+        res.status(201).send(note)
+    })
+})
+
+
 /**
  * Save a new note
  */
-router.post('/add-note', (req, res) => {
+router.post('/notes', (req, res) => {
     
     let { user_id, note } = req.body
     let query = `INSERT INTO notes (user_id, note) VALUES (?, ?)`
@@ -20,12 +82,13 @@ router.post('/add-note', (req, res) => {
     })
 })
 
+
 /**
  * Update a note
  */
-router.patch('/update-note', (req, res) => {
+router.put('/notes', (req, res) => {
     
-    let {note_id, note} = req.body
+    let { note_id, note } = req.body
     let query = `UPDATE notes SET note=? WHERE note_id=?`
     let values = [note, note_id]
 
@@ -39,12 +102,13 @@ router.patch('/update-note', (req, res) => {
         })
 })
 
+
 /**
- * Delete note
+ * Delete a note
  */
- router.delete('/delete-note', (req, res) => {
+ router.delete('/notes/:note_id', (req, res) => {
     
-    let {note_id } = req.body
+    let { note_id } = req.params
     let query = `DELETE FROM notes WHERE note_id=?`
     let values = [note_id]
 

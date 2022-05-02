@@ -12,9 +12,10 @@ connection.getConnection((err) => {
 
     // create notes table
     let query = `CREATE TABLE IF NOT EXISTS notes (
+                note_id INT NOT NULL AUTO_INCREMENT, 
                 user_id INT NOT NULL, 
                 note VARCHAR(255),
-                PRIMARY KEY(user_id))`
+                PRIMARY KEY(note_id))`
 
     connection.query(query, function(err, result){
         if (err) throw err;
