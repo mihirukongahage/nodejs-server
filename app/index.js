@@ -16,6 +16,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api', require('./notes/note'))
 app.use('/api', require('./uploads/upload'))
+app.use('/api', require('./auth/login'))
 
 // Error handling
 app.use((error, req, res, next) => {
