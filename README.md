@@ -86,3 +86,7 @@ http://localhost:3000/api-docs
 
 - CRUD functionalities for notes
 - Upload an image 
+
+## Highlevel Architecture
+
+![alt text](https://github.com/mihirukongahage/nodejs-server/blob/main/architecture.png?raw=true)
