@@ -12,11 +12,11 @@ const pool = require("../connection")
     pool.query(query, (err, result) => {
         if(err){
             console.log(err)
-            res.status(500).send(err)
+            res.status(400).send(err)
         }
         var notesArray = JSON.parse(JSON.stringify(result))
         console.log(`return all notes`)
-        res.status(201).send(notesArray)
+        res.status(200).send(notesArray)
     })
 })
 
@@ -33,11 +33,11 @@ const pool = require("../connection")
     pool.query(query, values, (err, result) => {
         if(err){
             console.log(err)
-            res.status(500).send(err)
+            res.status(400).send(err)
         }
         var note = JSON.parse(JSON.stringify(result))
         console.log(`return notes with the user id ${user_id}`)
-        res.status(201).send(note)
+        res.status(200).send(note)
     })
 })
 
@@ -54,11 +54,11 @@ const pool = require("../connection")
     pool.query(query, values, (err, result) => {
         if(err){
             console.log(err)
-            res.status(500).send(err)
+            res.status(400).send(err)
         }
         var note = JSON.parse(JSON.stringify(result))
         console.log(`return note with the id ${note_id}`)
-        res.status(201).send(note)
+        res.status(200).send(note)
     })
 })
 
@@ -75,7 +75,7 @@ router.post('/notes', (req, res) => {
     pool.query(query, values, (err, result) => {
         if(err){
             console.log(err)
-            res.status(500).send(err)
+            res.status(400).send(err)
         } 
         console.log(`note added to user ${user_id}`)
         res.status(201).send(`note added to user ${user_id}`)
@@ -95,7 +95,7 @@ router.put('/notes', (req, res) => {
     pool.query(query, values, (err, result) => {
         if(err){
                 console.log(err)
-                res.status(500).send(err)
+                res.status(400).send(err)
             } 
             console.log(`note with note id ${note_id} updated`)
             res.status(201).send(`note with note id ${note_id} updated`)
@@ -115,7 +115,7 @@ router.put('/notes', (req, res) => {
     pool.query(query, values, (err, result) => {
             if(err){
                 console.log(err)
-                res.status(500).send(err)
+                res.status(400).send(err)
             }
             console.log(`note with note id ${note_id} deleted`)
             res.status(201).send(`note with note id ${note_id} deleted`)
