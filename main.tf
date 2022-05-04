@@ -12,6 +12,7 @@ provider "aws" {
     secret_key = var.AWS_SECRET_KEY
 }
 
+// RDS Instance
 resource "aws_db_instance" "personal_notes_manager" {
   engine                  = "mysql"
   engine_version          = "8.0.28"
@@ -27,4 +28,10 @@ resource "aws_db_instance" "personal_notes_manager" {
 
 output "aws_db_instance_address" {
    value = aws_db_instance.personal_notes_manager.address
+}
+
+
+// S3 bucket
+resource "aws_s3_bucket" "personal-notes-manager-uploadbucket" {
+  bucket = "personal-notes-manager-uploadbucket"
 }
