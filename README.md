@@ -73,6 +73,14 @@ Currently configured to `http://localhost:3000/api/`
 
 - `POST /upload` - Upload an image
 
+### Endpoints to Swagger
+<<<<<<< HEAD
+
+User APIs...
+=======
+>>>>>>> bd848b3 (to test rebase)
+
+User APIs..
 
 ### Swagger documentation
 
@@ -86,3 +94,7 @@ http://localhost:3000/api-docs
 
 - CRUD functionalities for notes
 - Upload an image 
+
+## Highlevel Architecture
+
+![alt text](https://github.com/mihirukongahage/nodejs-server/blob/main/architecture.png?raw=true)
