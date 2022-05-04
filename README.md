@@ -64,9 +64,13 @@ The endpoint should be called by adding the prefix `http://<host>:<port>/api/` t
 
 Currently configured to `http://localhost:3000/api/`
 
-- `POST /add-note` - Add a new note
-- `PATCH /update-note` - Update a previously saved note
-- `DELETE /delete-note` - Delete a saved note
+- `GET /notes` - Get all notes
+- `GET /notes/:user_id` - Get notes by user_id
+- `GET /note/:note_id` - Get note by note_id
+- `POST /notes` - Add a new note
+- `PUT /notes` - Update a previously saved note
+- `DELETE /notes/:note_id` - Delete a note
+
 - `POST /upload` - Upload an image
 
 
@@ -80,5 +84,5 @@ http://localhost:3000/api-docs
 
 ## Features Implemented
 
-- Add, Update, Delete notes
+- CRUD functionalities for notes
 - Upload an image 

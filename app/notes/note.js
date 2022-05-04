@@ -64,7 +64,7 @@ const pool = require("../connection")
 
 
 /**
- * Save a new note
+ * Add a new note
  */
 router.post('/notes', (req, res) => {
     
