@@ -14,4 +14,5 @@ config.database = {
         user: `admin`,
         password: process.env.PASSWORD,
         database: `personal_notes_manager`,
+        multipleStatements: true
 }
