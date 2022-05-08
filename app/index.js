@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('../swagger.json');
 
 const { graphqlHTTP } = require("express-graphql")
-const schema = require('./schema/index')
+const schema = require('./graphql/schema')
 
 const app = express()
 const cors = require('cors')
