@@ -73,6 +73,7 @@ Currently configured to `http://localhost:3000/api/`
 
 - `POST /upload` - Upload an image
 
+### Endpoints to Swagger
 
 ### Swagger documentation
 
