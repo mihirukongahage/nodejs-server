@@ -18,9 +18,11 @@ cd /personal-notes-manager
 npm install
 ```
 
+### To use AWS services
+
 3. Configure Terraform
 
-## When using AWS services
+Set `config.aws_services` variable in `config.js` to `true`
 
 Create `secret.tfvars` file in the root directory and add the following AWS credentials,
 
@@ -46,15 +48,17 @@ terraform apply -var-file="secret.tfvars" -lock=false --auto-approve
 Copy `aws_db_instance_address` shown in CLI to `ENDPOINT` variable in `.env` file.
 ```
 
-## When using local intergration
+### When using local intergration
 
-Set mysql user to `root`
+3. Configure local database
+
+Set `config.aws_services` variable in `config.js` to `false`
 
 Run docker mysql
+
 ```sh
 docker-compose up
 ```
-
 
 4. Start the Server
 
