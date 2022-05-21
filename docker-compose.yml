@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10.5.8
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_USER=admin
+      - MYSQL_USER=admin
+      - MYSQL_DATABASE=personal_notes_manager
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - $PWD/data:/var/lib/mysql
+    expose:
+      - 3306
+
