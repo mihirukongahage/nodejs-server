@@ -1,13 +1,19 @@
 const mysql = require("mysql");
 const config = require("./config")
 
-const connection = mysql.createPool(config.database);
+const connection = config.aws_services === true
+    ? mysql.createPool(config.aws_database)
+    : mysql.createPool(config.local_database);
+                
 
 connection.getConnection((err) => {
     if(err){
         console.log(`Unable to connect to the database`, err)
     }
-    console.log(`Connected to Database`)
+
+    config.aws_services === true
+    ? console.log(`Connected to AWS database`)
+    : console.log(`Connected to local database`);
 
     // create tables
     let query = `CREATE TABLE IF NOT EXISTS notes (
