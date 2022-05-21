@@ -20,6 +20,8 @@ npm install
 
 3. Configure Terraform
 
+## When using AWS services
+
 Create `secret.tfvars` file in the root directory and add the following AWS credentials,
 
 ```sh
@@ -43,6 +45,16 @@ terraform apply -var-file="secret.tfvars" -lock=false --auto-approve
 ```sh
 Copy `aws_db_instance_address` shown in CLI to `ENDPOINT` variable in `.env` file.
 ```
+
+## When using local intergration
+
+Set mysql user to `root`
+
+Run docker mysql
+```sh
+docker-compose up
+```
+
 
 4. Start the Server
 

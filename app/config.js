@@ -9,9 +9,9 @@ config.server = {
 
 // Database configurations
 config.database = {
-        host: process.env.ENDPOINT,
+        host: process.env.HOST,
         port: process.env.PORT,
-        user: `admin`,
+        user: process.env.DB_USER,
         password: process.env.PASSWORD,
         database: `personal_notes_manager`,
         multipleStatements: true
