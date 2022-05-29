@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
+app.use("/health", (req, res) => {
+  res.status(200).send("OK");
+});
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
