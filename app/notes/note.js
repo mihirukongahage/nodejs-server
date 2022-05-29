@@ -95,19 +95,29 @@ router.put("/notes", (req, res) => {
 /**
  * Delete a note
  */
+let deleteNote;
 router.delete("/notes/:note_id", (req, res) => {
   let { note_id } = req.params;
-  let query = `DELETE FROM notes WHERE note_id=?`;
-  let values = [note_id];
 
-  pool.query(query, values, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.status(400).send(err);
-    }
-    console.log(`note with note id ${note_id} deleted`);
-    res.status(201).send(`note with note id ${note_id} deleted`);
-  });
+  if (note_id.charAt(0) !== "D") {
+    let query = `DELETE FROM notes WHERE note_id=?`;
+    let values = [note_id];
+
+    deleteNote = setTimeout(() => {
+      pool.query(query, values, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(400).send(err);
+        }
+        console.log(`note with note id ${note_id} deleted`);
+        res.status(201).send(`note with note id ${note_id} deleted`);
+      });
+    }, 5000);
+  } else {
+    clearTimeout(deleteNote);
+    console.log(`note ${note_id.slice(1)} deletion aborted`);
+    res.status(201).send(`note ${note_id.slice(1)} deletion aborted`);
+  }
 });
 
 module.exports = router;
