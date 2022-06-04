@@ -1,6 +1,7 @@
 const { GraphQLObjectType, GraphQLString } = require("graphql");
 const UserType = require("./types/user");
 const pool = require("../connection");
+const logger = require("../logger/logger");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -19,10 +20,10 @@ const mutation = new GraphQLObjectType({
           let values = [args.username, args.password, args.email];
           pool.query(query, values, (err, result) => {
             if (err) {
-              console.log(err);
+              logger.error(err);
               return err;
             }
-            console.log(`user ${args.username} created`);
+            logger.info(`user ${args.username} created`);
             resolve(args);
           });
         });

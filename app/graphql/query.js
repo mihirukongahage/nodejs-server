@@ -1,6 +1,7 @@
 const UserType = require("./types/user");
 const { GraphQLObjectType, GraphQLList, GraphQLInt } = require("graphql");
 const pool = require("../connection");
+const logger = require("../logger/logger");
 
 const query = new GraphQLObjectType({
   name: "Query",
@@ -18,7 +19,7 @@ const query = new GraphQLObjectType({
               return err;
             }
             let users = JSON.parse(JSON.stringify(result));
-            console.log(`return all notes`);
+            logger.info(`return all notes`);
             resolve(users);
           });
         });
@@ -39,7 +40,7 @@ const query = new GraphQLObjectType({
               return err;
             }
             let user = JSON.parse(JSON.stringify(result))[0];
-            console.log(`return user with id: ${args.id}`);
+            logger.info(`return user with id: ${args.id}`);
             resolve(user);
           });
         });

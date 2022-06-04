@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const config = require("./config");
+const logger = require('../app/logger/logger');
 
 const connection =
   config.aws_services === true
@@ -8,12 +9,12 @@ const connection =
 
 connection.getConnection((err) => {
   if (err) {
-    console.log(`Unable to connect to the database`, err);
+    logger.info(`Unable to connect to the database`, err);
   }
 
   config.aws_services === true
-    ? console.log(`Connected to AWS database`)
-    : console.log(`Connected to local database`);
+    ? logger.info(`Connected to AWS database`)
+    : logger.info(`Connected to local database`);
 
   // create tables
   let query = `CREATE TABLE IF NOT EXISTS notes (
@@ -31,7 +32,7 @@ connection.getConnection((err) => {
 
   connection.query(query, function (err, result) {
     if (err) throw err;
-    console.log("notes and user tables created");
+    logger.info(`notes and user tables created`);
   });
 });
 
