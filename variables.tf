@@ -15,7 +15,6 @@ variable "AWS_SECRET_KEY" {
   sensitive   = true
 }
 
-
 # DATABASE CONFIGS
 variable "username" {
   description = "database username"

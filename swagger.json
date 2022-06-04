@@ -22,13 +22,13 @@
                 "description": "",
                 "parameters": [
                     {
-                      "name": "user_id",
-                      "description": "Id of the note creator"
+                        "name": "user_id",
+                        "description": "Id of the note creator"
                     },
                     {
                         "name": "note",
                         "description": "Note added by the user"
-                      }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -43,13 +43,13 @@
                 "description": "",
                 "parameters": [
                     {
-                      "name": "note_id",
-                      "description": "Id of the note being updated"
+                        "name": "note_id",
+                        "description": "Id of the note being updated"
                     },
                     {
                         "name": "note",
                         "description": "Note updated by the user"
-                      }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -64,8 +64,8 @@
                 "description": "",
                 "parameters": [
                     {
-                      "name": "note_id",
-                      "description": "Id of the note being updated"
+                        "name": "note_id",
+                        "description": "Id of the note being updated"
                     }
                 ],
                 "responses": {
@@ -81,8 +81,8 @@
                 "description": "",
                 "parameters": [
                     {
-                      "image": "file",
-                      "description": "file to be uploaded"
+                        "image": "file",
+                        "description": "file to be uploaded"
                     }
                 ],
                 "responses": {
