@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const config = require("./config");
-const logger = require('../app/logger/logger');
+const logger = require("../app/logger/logger");
 
 const connection =
   config.aws_services === true

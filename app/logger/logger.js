@@ -21,7 +21,9 @@ const logger = createLogger({
         format.timestamp({ format: "DD-MMM-YYYY HH:mm:ss" }),
         format.printf(
           (info) =>
-            `${info.level.toUpperCase()}: ${[info.timestamp]} -- ${info.message}`
+            `${info.level.toUpperCase()}: ${[info.timestamp]} -- ${
+              info.message
+            }`
         )
       ),
     }),
@@ -32,7 +34,9 @@ const logger = createLogger({
         format.timestamp({ format: "DD-MMM-YYYY HH:mm:ss" }),
         format.printf(
           (info) =>
-            `${info.level.toUpperCase()}: ${[info.timestamp]} -- ${info.message}`
+            `${info.level.toUpperCase()}: ${[info.timestamp]} -- ${
+              info.message
+            }`
         )
       ),
     }),

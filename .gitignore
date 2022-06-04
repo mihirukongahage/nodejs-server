@@ -8,5 +8,5 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform
 
-data
+data/*
 logs/*

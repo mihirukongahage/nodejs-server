@@ -1,6 +1,13 @@
 # Personal Notes Manager
 
-https://geshan.com.np/blog/2020/11/nodejs-mysql-tutorial/
+A Node.js server using,
+* Expressjs
+* REST and GraphQL
+* AWS Services: RDS, S3
+* MySQL with Docker
+
+* Winston Logger
+* Swagger Documentation
 
 
 ## Run the application
@@ -76,6 +83,8 @@ Both database and server configurations can be found in the `app/config.js` file
 
 ### The available endpoints
 
+#### REST APIs
+
 The endpoint should be called by adding the prefix `http://<host>:<port>/api/` to the below endpoints.
 
 Currently configured to `http://localhost:3000/api/`
@@ -88,6 +97,10 @@ Currently configured to `http://localhost:3000/api/`
 - `DELETE /notes/:note_id` - Delete a note
 
 - `POST /upload` - Upload an image
+
+#### GraphQL 
+
+- GraphQL endpoints to be updated
 
 
 ### Swagger documentation
@@ -102,7 +115,29 @@ http://localhost:3000/api-docs
 
 - CRUD functionalities for notes
 - Upload an image 
+- CRUD functionalities for users
 
 ## Highlevel Architecture
 
 ![alt text](https://github.com/mihirukongahage/nodejs-server/blob/main/architecture.png?raw=true)
+
+## Folder Structure
+
+app
+├── config.js
+├── connection.js
+├── graphql
+│   ├── mutation.js
+│   ├── query.js
+│   ├── schema.js
+│   └── types
+│       └── user.js
+├── index.js
+├── logger
+│   └── logger.js
+├── notes
+│   ├── note.js
+│   └── note.test.js
+├── server.js
+└── uploads
+    └── upload.js
