@@ -117,12 +117,9 @@ http://localhost:3000/api-docs
 - Upload an image 
 - CRUD functionalities for users
 
-## Highlevel Architecture
-
-![alt text](https://github.com/mihirukongahage/nodejs-server/blob/main/architecture.png?raw=true)
-
 ## Folder Structure
 
+```bash
 app
 ├── config.js
 ├── connection.js
@@ -141,3 +138,9 @@ app
 ├── server.js
 └── uploads
     └── upload.js
+```
+
+## Highlevel Architecture
+
+![alt text](https://github.com/mihirukongahage/nodejs-server/blob/main/architecture.png?raw=true)
+
