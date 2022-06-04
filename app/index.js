@@ -6,6 +6,7 @@ const swaggerDocument = require("../swagger.json");
 
 const { graphqlHTTP } = require("express-graphql");
 const schema = require("./graphql/schema");
+const logger = require('./logger/logger');
 
 const app = express();
 const cors = require("cors");
@@ -14,13 +15,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-
 app.use("/health", (req, res) => {
   res.status(200).send("OK");
+  logger.info("server status check");
 });
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 
 app.use("/api", require("./notes/note"));
 app.use("/api", require("./uploads/upload"));
