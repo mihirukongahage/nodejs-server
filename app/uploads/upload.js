@@ -1,15 +1,18 @@
 const router = require("express").Router();
-const AWS = require("aws-sdk");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const fs = require("fs");
 require("dotenv").config();
 const multer = require("multer");
 
 const upload = multer({ dest: "images/" });
 
-const s3 = new AWS.S3({
+// Create S3 client with v3 API
+const s3Client = new S3Client({
   region: process.env.AWS_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+  },
 });
 
 /**
@@ -19,10 +22,15 @@ router.post("/upload", upload.single("image"), async (req, res) => {
   const file = req.file;
   console.log(file);
 
-  let data = await uploadtos3(file);
-  console.log(data);
+  try {
+    let data = await uploadtos3(file);
+    console.log(data);
 
-  res.status(201).send(`File uploaded`);
+    res.status(201).send(`File uploaded`);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(`File upload failed: ${err.message}`);
+  }
 });
 
 /*
@@ -36,7 +44,10 @@ async function uploadtos3(file) {
       Body: fs.createReadStream(file.path),
     };
 
-    return s3.upload(uploadParams).promise();
+    const command = new PutObjectCommand(uploadParams);
+    const response = await s3Client.send(command);
+
+    return response;
   } catch (err) {
     throw new Error(`S3 upload error: ${err.message}`);
   }
