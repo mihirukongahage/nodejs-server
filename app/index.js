@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 
-const { graphqlHTTP } = require("express-graphql");
+const { graphqlHTTP } = require("@bluesialia/express-graphql");
 const schema = require("./graphql/schema");
 const logger = require('./logger/logger');
 
