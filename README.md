@@ -1,146 +1,147 @@
-# Personal Notes Manager
+<div align="center">
+<img src="docs/imgs/logo.png" width="200">
 
-A Node.js server using,
-* Expressjs
-* REST and GraphQL
-* AWS Services: RDS, S3
-* MySQL with Docker
+[![GitHub Release][release-img]][release]
+[![Test][test-img]][test]
+[![Go Report Card][go-report-img]][go-report]
+[![License: Apache-2.0][license-img]][license]
+[![GitHub Downloads][github-downloads-img]][release]
+![Docker Pulls][docker-pulls]
 
-* Winston Logger
-* Swagger Documentation
+[📖 Documentation][docs]
+</div>
 
+Trivy ([pronunciation][pronunciation]) is a comprehensive and versatile security scanner.
+Trivy has *scanners* that look for security issues, and *targets* where it can find those issues.
 
-## Run the application
+Targets (what Trivy can scan):
 
-1. Clone the Github Project
+- Container Image
+- Filesystem
+- Git Repository (remote)
+- Virtual Machine Image
+- Kubernetes
 
-```sh
-git clone <github link>
-```
+Scanners (what Trivy can find there):
 
-2. Install the dependencies and devDependencies
+- OS packages and software dependencies in use (SBOM)
+- Known vulnerabilities (CVEs)
+- IaC issues and misconfigurations
+- Sensitive information and secrets
+- Software licenses
 
-```sh
-cd /personal-notes-manager
-npm install
-```
+Trivy supports most popular programming languages, operating systems, and platforms. For a complete list, see the [Scanning Coverage] page.
 
-### To use AWS services
+To learn more, go to the [Trivy homepage][homepage] for feature highlights, or to the [Documentation site][docs] for detailed information.
 
-3. Configure Terraform
+## Quick Start
 
-Set `config.aws_services` variable in `config.js` to `true`
+### Get Trivy
 
-Create `secret.tfvars` file in the root directory and add the following AWS credentials,
+Trivy is available in most common distribution channels. The full list of installation options is available in the [Installation] page. Here are a few popular examples:
 
-```sh
-# AWS CONFIGS
-AWS_REGION="<region>"
-AWS_ACCESS_KEY="<access_key>"
-AWS_SECRET_KEY="<secret_key>"
+- `brew install trivy`
+- `docker run aquasec/trivy`
+- Download binary from <https://github.com/aquasecurity/trivy/releases/latest/>
+- See [Installation] for more
 
-# DATABASE CONFIGS
-username="<username>"
-password="<password>"
-```
+Trivy is integrated with many popular platforms and applications. The complete list of integrations is available in the [Ecosystem] page. Here are a few popular examples:
 
-Initialize AWS resources
+- [GitHub Actions](https://github.com/aquasecurity/trivy-action)
+- [Kubernetes operator](https://github.com/aquasecurity/trivy-operator)
+- [VS Code plugin](https://github.com/aquasecurity/trivy-vscode-extension)
+- See [Ecosystem] for more
 
-```sh
-terraform init
-terraform apply -var-file="secret.tfvars" -lock=false --auto-approve
-```
+### Canary builds
+There are canary builds ([Docker Hub](https://hub.docker.com/r/aquasec/trivy/tags?page=1&name=canary), [GitHub](https://github.com/aquasecurity/trivy/pkgs/container/trivy/75776514?tag=canary), [ECR](https://gallery.ecr.aws/aquasecurity/trivy#canary) images and [binaries](https://github.com/aquasecurity/trivy/actions/workflows/canary.yaml)) generated with every push to the main branch.
 
-```sh
-Copy `aws_db_instance_address` shown in CLI to `ENDPOINT` variable in `.env` file.
-```
+Please be aware: canary builds might have critical bugs, so they are not recommended for use in production.
 
-### When using local intergration
-
-3. Configure local database
-
-Set `config.aws_services` variable in `config.js` to `false`
-
-Run docker mysql
-
-```sh
-docker-compose up
-```
-
-4. Start the Server
-
-```sh
-npm start
-```
-
-5. Create the database tables manually.
-
-## How to use the APIs
-
-The frontend application should call the implemented backend endpoints.
-In the development phase, the server is run on `localhost` in the port `3000`
-Both database and server configurations can be found in the `app/config.js` file.
-
-### The available endpoints
-
-#### REST APIs
-
-The endpoint should be called by adding the prefix `http://<host>:<port>/api/` to the below endpoints.
-
-Currently configured to `http://localhost:3000/api/`
-
-- `GET /notes` - Get all notes
-- `GET /notes/:user_id` - Get notes by user_id
-- `GET /note/:note_id` - Get note by note_id
-- `POST /notes` - Add a new note
-- `PUT /notes` - Update a previously saved note
-- `DELETE /notes/:note_id` - Delete a note
-
-- `POST /upload` - Upload an image
-
-#### GraphQL 
-
-- GraphQL endpoints to be updated
-
-
-### Swagger documentation
-
-Swagger API documentation is available with more information.
-
-```sh
-http://localhost:3000/api-docs
-```
-
-## Features Implemented
-
-- CRUD functionalities for notes
-- Upload an image 
-- CRUD functionalities for users
-
-## Folder Structure
+### General usage
 
 ```bash
-app
-├── config.js
-├── connection.js
-├── graphql
-│   ├── mutation.js
-│   ├── query.js
-│   ├── schema.js
-│   └── types
-│       └── user.js
-├── index.js
-├── logger
-│   └── logger.js
-├── notes
-│   ├── note.js
-│   └── note.test.js
-├── server.js
-└── uploads
-    └── upload.js
+trivy <target> [--scanners <scanner1,scanner2>] <subject>
 ```
 
-## Highlevel Architecture
+Examples:
 
-![alt text](https://github.com/mihirukongahage/nodejs-server/blob/main/architecture.png?raw=true)
+```bash
+trivy image python:3.4-alpine
+```
 
+<details>
+<summary>Result</summary>
+
+https://user-images.githubusercontent.com/1161307/171013513-95f18734-233d-45d3-aaf5-d6aec687db0e.mov
+
+</details>
+
+```bash
+trivy fs --scanners vuln,secret,misconfig myproject/
+```
+
+<details>
+<summary>Result</summary>
+
+https://user-images.githubusercontent.com/1161307/171013917-b1f37810-f434-465c-b01a-22de036bd9b3.mov
+
+</details>
+
+```bash
+trivy k8s --report summary cluster
+```
+
+<details>
+<summary>Result</summary>
+
+![k8s summary](docs/imgs/trivy-k8s.png)
+
+</details>
+
+## FAQ
+
+### How to pronounce the name "Trivy"?
+
+`tri` is pronounced like **tri**gger, `vy` is pronounced like en**vy**.
+
+## Want more? Check out Aqua
+
+If you liked Trivy, you will love Aqua which builds on top of Trivy to provide even more enhanced capabilities for a complete security management offering.  
+You can find a high level comparison table specific to Trivy users [here](https://trivy.dev/docs/latest/commercial/compare/).
+In addition check out the <https://aquasec.com> website for more information about our products and services.
+If you'd like to contact Aqua or request a demo, please use this form: <https://www.aquasec.com/demo>
+
+## Community
+
+Trivy is an [Aqua Security][aquasec] open source project.  
+Learn about our open source work and portfolio [here][oss].  
+Contact us about any matter by opening a GitHub Discussion [here][discussions]
+
+Please ensure to abide by our [Code of Conduct][code-of-conduct] during all interactions.
+
+[test]: https://github.com/aquasecurity/trivy/actions/workflows/test.yaml
+[test-img]: https://github.com/aquasecurity/trivy/actions/workflows/test.yaml/badge.svg
+[go-report]: https://goreportcard.com/report/github.com/aquasecurity/trivy
+[go-report-img]: https://goreportcard.com/badge/github.com/aquasecurity/trivy
+[release]: https://github.com/aquasecurity/trivy/releases
+[release-img]: https://img.shields.io/github/release/aquasecurity/trivy.svg?logo=github
+[github-downloads-img]: https://img.shields.io/github/downloads/aquasecurity/trivy/total?logo=github
+[docker-pulls]: https://img.shields.io/docker/pulls/aquasec/trivy?logo=docker&label=docker%20pulls%20%2F%20trivy
+[license]: https://github.com/aquasecurity/trivy/blob/main/LICENSE
+[license-img]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
+[homepage]: https://trivy.dev
+[docs]: https://trivy.dev/docs/latest/
+[pronunciation]: #how-to-pronounce-the-name-trivy
+[code-of-conduct]: https://github.com/aquasecurity/community/blob/main/CODE_OF_CONDUCT.md
+
+[Installation]:https://trivy.dev/docs/latest/getting-started/installation/
+[Ecosystem]: https://trivy.dev/docs/latest/ecosystem/
+[Scanning Coverage]: https://trivy.dev/docs/latest/coverage/
+
+[alpine]: https://ariadne.space/2021/06/08/the-vulnerability-remediation-lifecycle-of-alpine-containers/
+[rego]: https://www.openpolicyagent.org/docs/latest/#rego
+[sigstore]: https://www.sigstore.dev/
+
+[aquasec]: https://aquasec.com
+[oss]: https://www.aquasec.com/products/open-source-projects/
+[discussions]: https://github.com/aquasecurity/trivy/discussions
