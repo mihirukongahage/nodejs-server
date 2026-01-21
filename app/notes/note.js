@@ -71,7 +71,7 @@ router.post("/notes", (req, res) => {
       return res.status(500).json({ error: "An error occurred while adding note" });
     }
     logger.info(`note added to user ${user_id}`);
-    res.status(201).send(`note added to user ${user_id}`);
+    res.status(201).json({ message: "note added", user_id: user_id });
   });
 });
 
