@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const AWS = require("aws-sdk");
 const fs = require("fs");
+const path = require("path");
 require("dotenv").config();
 const multer = require("multer");
 
@@ -30,10 +31,19 @@ Upload a file to s3
 */
 async function uploadtos3(file) {
   try {
+    // Sanitize file path to prevent path traversal attacks
+    const uploadDir = path.resolve("images/");
+    const sanitizedPath = path.resolve(file.path);
+    
+    // Ensure the file path is within the intended upload directory
+    if (!sanitizedPath.startsWith(uploadDir)) {
+      throw new Error("Invalid file path");
+    }
+    
     const uploadParams = {
       Bucket: "personal-notes-manager-uploadbucket",
       Key: file.filename,
-      Body: fs.createReadStream(file.path),
+      Body: fs.createReadStream(sanitizedPath),
     };
 
     return s3.upload(uploadParams).promise();
