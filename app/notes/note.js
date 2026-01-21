@@ -11,7 +11,7 @@ router.get("/notes", (req, res) => {
   pool.query(query, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(400).send({ error: "An error occurred while retrieving notes" });
     }
     var notesArray = JSON.parse(JSON.stringify(result));
     logger.info(`return all notes`);
@@ -30,7 +30,7 @@ router.get("/notes/:user_id", (req, res) => {
   pool.query(query, values, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(400).send({ error: "An error occurred while retrieving notes" });
     }
     var note = JSON.parse(JSON.stringify(result));
     logger.info(`return notes with the user id ${user_id}`);
@@ -49,7 +49,7 @@ router.get("/note/:note_id", (req, res) => {
   pool.query(query, values, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(400).send({ error: "An error occurred while retrieving note" });
     }
     var note = JSON.parse(JSON.stringify(result));
     logger.info(`return note with the id ${note_id}`);
@@ -68,7 +68,7 @@ router.post("/notes", (req, res) => {
   pool.query(query, values, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(400).send({ error: "An error occurred while adding note" });
     }
     logger.info(`note added to user ${user_id}`);
     res.status(201).send(`note added to user ${user_id}`);
@@ -86,7 +86,7 @@ router.put("/notes", (req, res) => {
   pool.query(query, values, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(400).send({ error: "An error occurred while updating note" });
     }
     logger.info(`note with note id ${note_id} updated`);
     res.status(201).json({ message: "note updated", note_id: note_id });
@@ -108,7 +108,7 @@ router.delete("/notes/:note_id", (req, res) => {
       pool.query(query, values, (err, result) => {
         if (err) {
           console.log(err);
-          res.status(400).send(err);
+          return res.status(400).send({ error: "An error occurred while deleting note" });
         }
         console.log(`note with note id ${note_id} deleted`);
         res.status(201).send(`note with note id ${note_id} deleted`);
