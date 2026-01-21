@@ -89,7 +89,7 @@ router.put("/notes", (req, res) => {
       res.status(400).send(err);
     }
     logger.info(`note with note id ${note_id} updated`);
-    res.status(201).send(`note with note id ${note_id} updated`);
+    res.status(201).json({ message: "note updated", note_id: note_id });
   });
 });
 
