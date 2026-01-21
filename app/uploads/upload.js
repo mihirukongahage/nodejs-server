@@ -3,8 +3,17 @@ const AWS = require("aws-sdk");
 const fs = require("fs");
 require("dotenv").config();
 const multer = require("multer");
+const rateLimit = require("express-rate-limit");
 
 const upload = multer({ dest: "images/" });
+
+const uploadLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: "Too many upload requests from this IP, please try again later.",
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
@@ -15,7 +24,7 @@ const s3 = new AWS.S3({
 /**
  * Upload an image
  */
-router.post("/upload", upload.single("image"), async (req, res) => {
+router.post("/upload", uploadLimiter, upload.single("image"), async (req, res) => {
   const file = req.file;
   console.log(file);
 
