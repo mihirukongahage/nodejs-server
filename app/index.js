@@ -9,6 +9,7 @@ const schema = require("./graphql/schema");
 const logger = require('./logger/logger');
 
 const app = express();
+app.disable('x-powered-by');
 const cors = require("cors");
 
 app.use(bodyParser.urlencoded({ extended: false }));
