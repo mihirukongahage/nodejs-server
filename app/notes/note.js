@@ -71,7 +71,7 @@ router.post("/notes", (req, res) => {
       res.status(400).send(err);
     }
     logger.info(`note added to user ${user_id}`);
-    res.status(201).send(`note added to user ${user_id}`);
+    res.status(201).json({ message: 'note added to user', user_id: user_id });
   });
 });
 
