@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
@@ -10,6 +11,9 @@ const logger = require('./logger/logger');
 
 const app = express();
 const cors = require("cors");
+
+// Use helmet to disable X-Powered-By header and add other security headers
+app.use(helmet());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
