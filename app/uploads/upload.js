@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const AWS = require("aws-sdk");
 const fs = require("fs");
+const path = require("path");
 require("dotenv").config();
 const multer = require("multer");
 
@@ -30,10 +31,19 @@ Upload a file to s3
 */
 async function uploadtos3(file) {
   try {
+    // CWE-23 Fix: Validate file path to prevent path traversal attacks
+    const baseDir = path.resolve("images/");
+    const resolvedPath = path.resolve(file.path);
+    
+    // Ensure the file path is within the expected directory
+    if (!resolvedPath.startsWith(baseDir + path.sep) && resolvedPath !== baseDir) {
+      throw new Error("Invalid file path - potential path traversal detected");
+    }
+
     const uploadParams = {
       Bucket: "personal-notes-manager-uploadbucket",
       Key: file.filename,
-      Body: fs.createReadStream(file.path),
+      Body: fs.createReadStream(resolvedPath),
     };
 
     return s3.upload(uploadParams).promise();
