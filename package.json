@@ -17,6 +17,9 @@
     "url": "https://github.com/mihirukongahage/personal-notes-manager/issues"
   },
   "homepage": "https://github.com/mihirukongahage/personal-notes-manager#readme",
+  "overrides": {
+    "qs": "6.14.1"
+  },
   "dependencies": {
     "aws-sdk": "^2.1116.0",
     "body-parser": "^1.20.3",
