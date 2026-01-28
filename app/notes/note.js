@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const pool = require("../connection");
 const logger = require("../logger/logger");
+const escapeHtml = require("escape-html");
 
 /**
  * Get all notes
@@ -71,7 +72,7 @@ router.post("/notes", (req, res) => {
       res.status(400).send(err);
     }
     logger.info(`note added to user ${user_id}`);
-    res.status(201).send(`note added to user ${user_id}`);
+    res.status(201).send(`note added to user ${escapeHtml(String(user_id))}`);
   });
 });
 
@@ -89,7 +90,7 @@ router.put("/notes", (req, res) => {
       res.status(400).send(err);
     }
     logger.info(`note with note id ${note_id} updated`);
-    res.status(201).send(`note with note id ${note_id} updated`);
+    res.status(201).send(`note with note id ${escapeHtml(String(note_id))} updated`);
   });
 });
 
@@ -111,13 +112,13 @@ router.delete("/notes/:note_id", (req, res) => {
           res.status(400).send(err);
         }
         console.log(`note with note id ${note_id} deleted`);
-        res.status(201).send(`note with note id ${note_id} deleted`);
+        res.status(201).send(`note with note id ${escapeHtml(String(note_id))} deleted`);
       });
     }, 5000);
   } else {
     clearTimeout(deleteNote);
     console.log(`note ${note_id.slice(1)} deletion aborted`);
-    res.status(201).send(`note ${note_id.slice(1)} deletion aborted`);
+    res.status(201).send(`note ${escapeHtml(String(note_id.slice(1)))} deletion aborted`);
   }
 });
 
