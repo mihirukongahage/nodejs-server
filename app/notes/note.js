@@ -11,7 +11,7 @@ router.get("/notes", (req, res) => {
   pool.query(query, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(500).send({ error: "An internal server error occurred" });
     }
     var notesArray = JSON.parse(JSON.stringify(result));
     logger.info(`return all notes`);
@@ -30,7 +30,7 @@ router.get("/notes/:user_id", (req, res) => {
   pool.query(query, values, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(500).send({ error: "An internal server error occurred" });
     }
     var note = JSON.parse(JSON.stringify(result));
     logger.info(`return notes with the user id ${user_id}`);
@@ -49,7 +49,7 @@ router.get("/note/:note_id", (req, res) => {
   pool.query(query, values, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(500).send({ error: "An internal server error occurred" });
     }
     var note = JSON.parse(JSON.stringify(result));
     logger.info(`return note with the id ${note_id}`);
@@ -68,7 +68,7 @@ router.post("/notes", (req, res) => {
   pool.query(query, values, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(500).send({ error: "An internal server error occurred" });
     }
     logger.info(`note added to user ${user_id}`);
     res.status(201).send(`note added to user ${user_id}`);
@@ -86,7 +86,7 @@ router.put("/notes", (req, res) => {
   pool.query(query, values, (err, result) => {
     if (err) {
       logger.error(err);
-      res.status(400).send(err);
+      return res.status(500).send({ error: "An internal server error occurred" });
     }
     logger.info(`note with note id ${note_id} updated`);
     res.status(201).send(`note with note id ${note_id} updated`);
@@ -107,16 +107,16 @@ router.delete("/notes/:note_id", (req, res) => {
     deleteNote = setTimeout(() => {
       pool.query(query, values, (err, result) => {
         if (err) {
-          console.log(err);
-          res.status(400).send(err);
+          logger.error(err);
+          return res.status(500).send({ error: "An internal server error occurred" });
         }
-        console.log(`note with note id ${note_id} deleted`);
+        logger.info(`note with note id ${note_id} deleted`);
         res.status(201).send(`note with note id ${note_id} deleted`);
       });
     }, 5000);
   } else {
     clearTimeout(deleteNote);
-    console.log(`note ${note_id.slice(1)} deletion aborted`);
+    logger.info(`note ${note_id.slice(1)} deletion aborted`);
     res.status(201).send(`note ${note_id.slice(1)} deletion aborted`);
   }
 });
