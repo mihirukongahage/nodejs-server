@@ -11,6 +11,9 @@ const logger = require('./logger/logger');
 const app = express();
 const cors = require("cors");
 
+// Security: Disable X-Powered-By header to prevent server technology disclosure
+app.disable('x-powered-by');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
